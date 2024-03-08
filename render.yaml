@@ -3,9 +3,10 @@
 # Standard tier will give the best performance, anything lower do not
 # expect high performance.
 
+databases:
+  - name: superagentdb
+
 services:
-  databases:
-    - name: superagentdb
   - type: web
     name: superagent-api
     repo: https://github.com/homanp/superagent.git
