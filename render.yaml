@@ -4,6 +4,8 @@
 # expect high performance.
 
 services:
+  databases:
+    - name: superagentdb
   - type: web
     name: superagent-api
     repo: https://github.com/homanp/superagent.git
@@ -21,10 +23,34 @@ services:
       - key: OPENAI_API_KEY
         value: ""
       - key: DATABASE_URL
-        value: ""
+        fromDatabase:
+          name: superagentdb
+          property: connectionString
       - key: DATABASE_MIGRATION_URL
-        value: ""
+        fromDatabase:
+          name: superagentdb
+          property: connectionString
       - key: JWT_SECRET
         generateValue: true
+      - key: OPENROUTER_API_KEY
+        value: ""
+      - key: DATABASE_SHADOW_URL
+        value: ""
+      - key: MEMORY
+        value: motorhead
+      - key: REDIS_MEMORY_URL
+        value: redis://localhost:6379/0
+      - key: REDIS_MEMORY_WINDOW
+        value: 10
+      - key: MEMORY_API_URL
+        value: https://memory.superagent.sh
+      - key: E2B_API_KEY
+        value: e2b_21b611cdf96fad06a6a819708734be20cfe8b777
+      - key: LANGFUSE_HOST
+        value: https://cloud.langfuse.com
+      - key: LANGCHAIN_TRACING_V2
+        value: False
+      - key: LANGCHAIN_ENDPOINT
+        value: https://api.smith.langchain.com
       - key: "__AVAIlABLE_ENVS__"
         value: "https://github.com/homanp/superagent/blob/main/libs/superagent/.env.example"
