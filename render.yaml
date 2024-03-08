@@ -1,0 +1,30 @@
+# Will create a SuperAgent API instance.
+# See Standard compute tier pricing costs: https://render.com/pricing
+# Standard tier will give the best performance, anything lower do not
+# expect high performance.
+
+services:
+  - type: web
+    name: superagent-api
+    repo: https://github.com/homanp/superagent.git
+    runtime: docker
+    region: oregon # optional (defaults to oregon)
+    plan: standard # optional (defaults to starter instance type)
+    numInstances: 1 # optional (defaults to 1)
+    rootDir: ./libs/superagent
+    dockerfilePath: Dockerfile
+    healthCheckPath: /api/v1
+    autoDeploy: false
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: OPENAI_API_KEY
+        value: ""
+      - key: DATABASE_URL
+        value: ""
+      - key: DATABASE_MIGRATION_URL
+        value: ""
+      - key: JWT_SECRET
+        generateValue: true
+      - key: "__AVAIlABLE_ENVS__"
+        value: "https://github.com/homanp/superagent/blob/main/libs/superagent/.env.example"
